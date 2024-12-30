@@ -28,8 +28,6 @@ grafana:
   ##
   defaultDashboardsEnabled: false
 
-
-  ## Init Password Must Be Change ##
   adminPassword: admin!com
 
   persistence:
@@ -41,16 +39,41 @@ grafana:
 
   sidecar:
     datasources:
-      enabled: true
-      name: LocalCluster
-      uid: localcluster
+      enabled: false
+      defaultDatasourceEnabled: false
+      isDefaultDatasource: false
+
+      name: Prometheus
+      uid: prometheus
+
+      alertmanager:
+        enabled: false
+
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: k8s-role
+                operator: In
+                values:
+                  - 'mgmt'
 
 ## Configuration for kube-state-metrics subchart
 ##
 kube-state-metrics:
   metricAnnotationsAllowList:
     - pods=[*]
-    - node=[*]
+    - nodes=[*]
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: k8s-role
+                operator: In
+                values:
+                  - 'mgmt'
 
 ## Manages Prometheus and Alertmanager components
 ##
