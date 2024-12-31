@@ -2777,7 +2777,6 @@ spec:
     spec:
       affinity:
         nodeAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution: null
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
@@ -3398,7 +3397,6 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  annotations: null
   labels:
     app: istio-ingressgateway
     app.kubernetes.io/instance: istio
