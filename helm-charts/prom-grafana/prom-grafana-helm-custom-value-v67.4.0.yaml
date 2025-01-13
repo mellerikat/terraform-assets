@@ -64,6 +64,8 @@ grafana:
 kube-state-metrics:
   metricAnnotationsAllowList:
     - pods=[*]
+  metricLabelsAllowlist:
+    - pods=[*]
     - nodes=[*]
   affinity:
     nodeAffinity:
